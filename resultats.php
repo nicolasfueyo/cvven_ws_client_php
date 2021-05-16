@@ -2,15 +2,17 @@
 
 $date = $_POST['date'];
 
+// Créer l'object SoapClient à partir du fichier WSDL partagé par le WebService Java
 $wsdl = 'DisposWS.wsdl';
 $client = new SoapClient($wsdl,[]);  // The trace param will show you errors
 
-// web service input param
+// Appelle l'opération rechercheDispoParDate de notre WebService Java
 $request_param = array(
     'date' => $date
 );
-
 $res = $client->rechercheDisposParDate($request_param);
+
+// Récupère le tableau de résultat ( nos disponibilités )
 $dispos = $res->return;
 ?>
 
